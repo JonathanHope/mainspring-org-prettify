@@ -1,12 +1,12 @@
 
 # Table of Contents
 
-1.  [mainspring-org-prettify](#org3755b49)
-    1.  [Overview](#orgfd2f647)
-    2.  [Installation](#orgd5a9fc7)
+1.  [mainspring-org-prettify](#orgfd52790)
+    1.  [Overview](#org9e98a4b)
+    2.  [Installation](#org510e513)
 
 
-<a id="org3755b49"></a>
+<a id="orgfd52790"></a>
 
 # mainspring-org-prettify
 
@@ -15,11 +15,11 @@ Substitute characters in org mode for prettier alternatives.
 ![img](mainspring-org-prettify.png)
 
 
-<a id="orgfd2f647"></a>
+<a id="org9e98a4b"></a>
 
 ## Overview
 
-mainspring-org-prettify can substitute a wide variety of cahracters in org documents for prettier alternatives. There are:
+mainspring-org-prettify can substitute a wide variety of characters in org documents for prettier alternatives. These are:
 
 -   Headline stars
 -   TODO
@@ -31,7 +31,7 @@ mainspring-org-prettify can substitute a wide variety of cahracters in org docum
 Its killer feature is the pretty headline stars replacement still has a meaningful level indicator.
 
 
-<a id="orgd5a9fc7"></a>
+<a id="org510e513"></a>
 
 ## Installation
 

@@ -6,7 +6,7 @@ Substitute characters in org mode for prettier alternatives.
 
 ** Overview
 
-mainspring-org-prettify can substitute a wide variety of cahracters in org documents for prettier alternatives. There are:
+mainspring-org-prettify can substitute a wide variety of characters in org documents for prettier alternatives. These are:
 
  * Headline stars
  * TODO
