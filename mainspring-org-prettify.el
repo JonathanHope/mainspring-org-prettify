@@ -73,7 +73,6 @@
       (mainspring-org-prettify-add-to-list 'headline-char mainspring-org-prettify-headline-bullet))))
 
 (define-minor-mode mainspring-org-prettify-mode
-  :group 'mainspring-org-prettify
   "Visual tweaks for org mode."
   nil nil nil
   (let* ((headlines
