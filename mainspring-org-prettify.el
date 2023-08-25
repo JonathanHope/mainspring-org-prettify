@@ -46,16 +46,32 @@
   "What character to demark a TODO in a headline."
   :group 'mainspring-org-prettify)
 
+(defcustom mainspring-org-prettify-todo-pad nil
+  "Whether to add a padding char to the TODO replacement."
+  :group 'mainspring-org-prettify)
+
 (defcustom mainspring-org-prettify-done ?⬛
   "What character to demark a DONE in a headline."
+  :group 'mainspring-org-prettify)
+
+(defcustom mainspring-org-prettify-done-pad nil
+  "Whether to add a padding char to the DONE replacement."
   :group 'mainspring-org-prettify)
 
 (defcustom mainspring-org-prettify-checkbox-unchecked ?⚪
   "What character to demark a unchecked checkbox in a plain list."
   :group 'mainspring-org-prettify)
 
+(defcustom mainspring-org-prettify-checkbox-unchecked-pad nil
+  "Whether to add pading to the checked checkbox replacemnet."
+  :group 'mainspring-org-prettify)
+
 (defcustom mainspring-org-prettify-checkbox-checked ?⚫
   "What character to demark a checked checkbox in a plain list."
+  :group 'mainspring-org-prettify)
+
+(defcustom mainspring-org-prettify-checkbox-checked-pad nil
+  "Whether to add pading to the unchecked checkbox replacemnet."
   :group 'mainspring-org-prettify)
 
 (defun mainspring-org-prettify-add-to-list (list-var element)
@@ -71,6 +87,15 @@
           (mainspring-org-prettify-add-to-list 'headline-char mainspring-org-prettify-headline-dash)
           (mainspring-org-prettify-add-to-list 'headline-char '(Br . Bl))))
       (mainspring-org-prettify-add-to-list 'headline-char mainspring-org-prettify-headline-bullet))))
+
+(defun mainspring-org-prettify-get-char (replacement pad)
+  (let ((char '()))
+    (progn
+      (mainspring-org-prettify-add-to-list 'char replacement)
+      (if pad (mainspring-org-prettify-add-to-list 'char '(Br . Bl)))
+      (if pad (mainspring-org-prettify-add-to-list 'char ?\s))
+      char)))
+
 
 (define-minor-mode mainspring-org-prettify-mode
   "Visual tweaks for org mode."
@@ -88,14 +113,18 @@
              (0 (prog1 () (compose-region
                            (- (match-end 0) 5)
                            (- (match-end 0) 1)
-                           mainspring-org-prettify-todo))))))
+                           (mainspring-org-prettify-get-char
+                            mainspring-org-prettify-todo
+                            mainspring-org-prettify-todo-pad)))))))
 
          (done
           `(("^\\*+ DONE "
              (0 (prog1 () (compose-region
                            (- (match-end 0) 5)
                            (- (match-end 0) 1)
-                           mainspring-org-prettify-done))))))
+                           (mainspring-org-prettify-get-char
+                            mainspring-org-prettify-done
+                            mainspring-org-prettify-done-pad)))))))
 
          (plain-list-plus
           `(("^ +\\+ "
@@ -127,7 +156,9 @@
               (prog1 () (compose-region
                          (- (match-end 0) 4)
                          (- (match-end 0) 1)
-                         mainspring-org-prettify-checkbox-unchecked))))))
+                         (mainspring-org-prettify-get-char
+                          mainspring-org-prettify-checkbox-unchecked
+                          mainspring-org-prettify-checkbox-unchecked-pad)))))))
 
          (checkbox-checked
           `(("^ +\\(\\-\\|\\+\\|\\*\\|[0-9]+[\\)\\.]\\) \\[X\\] "
@@ -135,7 +166,9 @@
               (prog1 () (compose-region
                          (- (match-end 0) 4)
                          (- (match-end 0) 1)
-                         mainspring-org-prettify-checkbox-checked)))))))
+                         (mainspring-org-prettify-get-char
+                          mainspring-org-prettify-checkbox-checked
+                          mainspring-org-prettify-checkbox-checked-pad))))))))
 
     (if mainspring-org-prettify-mode
         (progn
